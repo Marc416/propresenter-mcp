@@ -170,23 +170,45 @@ src/
 │   ├── themes.ts          # Group 22: 5 endpoints
 │   ├── timers.ts          # Group 23: 12 endpoints
 │   └── transport.ts       # Group 24: 10 endpoints
-├── tools/         # MCP tool definitions for each group
+├── tools/            # MCP tool definitions (18 modules)
 │   ├── announcement.ts
 │   ├── audio.ts
 │   ├── capture.ts
 │   ├── clear.ts
+│   ├── globalGroups.ts
 │   ├── library.ts
 │   ├── looks.ts
 │   ├── macros.ts
+│   ├── masks.ts
 │   ├── messages.ts
+│   ├── playlists.ts
 │   ├── presentation.ts
+│   ├── props.ts
+│   ├── stage.ts
 │   ├── status.ts
-│   └── timers.ts
-├── handlers/      # Request handlers for each group
+│   ├── themes.ts
+│   ├── timers.ts
+│   └── transport.ts
+├── handlers/         # Request handlers (18 modules)
 │   ├── announcement.ts
 │   ├── audio.ts
-│   └── others.ts
-└── index.ts       # Main server entry point
+│   ├── capture.ts
+│   ├── clear.ts
+│   ├── globalGroups.ts
+│   ├── library.ts
+│   ├── looks.ts
+│   ├── macros.ts
+│   ├── masks.ts
+│   ├── messages.ts
+│   ├── playlists.ts
+│   ├── presentation.ts
+│   ├── props.ts
+│   ├── stage.ts
+│   ├── status.ts
+│   ├── themes.ts
+│   ├── timers.ts
+│   └── transport.ts
+└── index.ts          # Main server entry point
 
 api/
 ├── swagger.json   # OpenAPI 3.0.2 spec (9793 lines)
@@ -194,20 +216,12 @@ api/
 └── api.py         # API documentation generator
 ```
 
-Each client module includes a comment header referencing its API group number for easy cross-reference with the complete API documentation in `api/api.md`.
-│   ├── clear.ts
-│   ├── library.ts
-│   ├── looks.ts
-│   ├── macros.ts
-│   ├── messages.ts
-│   ├── presentation.ts
-│   ├── status.ts
-│   └── timers.ts
-├── handlers/      # Request handlers for each group
-│   ├── announcement.ts
-│   ├── audio.ts
-│   └── others.ts
-└── index.ts       # Main server entry point
+Each module follows a consistent three-layer architecture:
+- **Clients**: API call wrappers with type-safe methods
+- **Tools**: MCP tool definitions with JSON schemas
+- **Handlers**: Request processors that map tool calls to client methods
+
+All client modules include comment headers referencing API group numbers for easy cross-reference with `api/api.md`.
 ```
 
 ## Prerequisites
@@ -417,7 +431,10 @@ This server implements the complete ProPresenter API documented at https://opena
 - **Total Endpoints**: 231 REST API endpoints
 - **API Groups**: 27 functional groups
 - **Client Modules**: 18 TypeScript client classes
+- **Tool Definitions**: 18 MCP tool modules
+- **Handler Modules**: 18 request handler modules
 - **HTTP Methods**: Full support for GET, POST, PUT, DELETE operations
+- **Architecture**: Complete three-layer implementation (clients → tools → handlers)
 
 See `api/api.md` for complete API documentation with all 231 endpoints organized by group.
 
