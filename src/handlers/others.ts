@@ -133,10 +133,6 @@ export function createMessagesHandlers(client: MessagesClient) {
 
 export function createPresentationHandlers(client: PresentationClient) {
   return {
-    list_presentations: async () => {
-      const result = await client.getPresentations();
-      return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-    },
     trigger_presentation: async (args: { presentationUuid: string; index?: number }) => {
       if (args.index !== undefined) {
         await client.triggerPresentationCue(args.presentationUuid, args.index);

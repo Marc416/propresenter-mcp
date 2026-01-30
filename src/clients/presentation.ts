@@ -3,10 +3,6 @@
 export class PresentationClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}
 
-  async getPresentations(): Promise<any> {
-    return this.fetch("/v1/libraries");
-  }
-
   async triggerPresentation(uuid: string): Promise<any> {
     return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/trigger`);
   }

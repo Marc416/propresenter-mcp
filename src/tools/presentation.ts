@@ -3,14 +3,6 @@ import { Tool } from "@modelcontextprotocol/sdk/types.js";
 
 export const presentationTools: Tool[] = [
   {
-    name: "list_presentations",
-    description: "List all available presentations in the ProPresenter library",
-    inputSchema: {
-      type: "object",
-      properties: {},
-    },
-  },
-  {
     name: "trigger_presentation",
     description: "Trigger a specific presentation by UUID, optionally starting at a specific slide index",
     inputSchema: {
