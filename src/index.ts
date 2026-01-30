@@ -50,24 +50,22 @@ import { masksTools } from "./tools/masks.js";
 // Import handlers
 import { createAnnouncementHandlers } from "./handlers/announcement.js";
 import { createAudioHandlers } from "./handlers/audio.js";
-import {
-  createCaptureHandlers,
-  createClearHandlers,
-  createLibraryHandlers,
-  createLooksHandlers,
-  createMacrosHandlers,
-  createMessagesHandlers,
-  createPresentationHandlers,
-  createStatusHandlers,
-  createTimersHandlers,
-  createPlaylistsHandlers,
-  createPropsHandlers,
-  createStageHandlers,
-  createThemesHandlers,
-  createTransportHandlers,
-  createGlobalGroupsHandlers,
-  createMasksHandlers,
-} from "./handlers/others.js";
+import { createCaptureHandlers } from "./handlers/capture.js";
+import { createClearHandlers } from "./handlers/clear.js";
+import { createLibraryHandlers } from "./handlers/library.js";
+import { createLooksHandlers } from "./handlers/looks.js";
+import { createMacrosHandlers } from "./handlers/macros.js";
+import { createMessagesHandlers } from "./handlers/messages.js";
+import { createPresentationHandlers } from "./handlers/presentation.js";
+import { createStatusHandlers } from "./handlers/status.js";
+import { createTimersHandlers } from "./handlers/timers.js";
+import { createPlaylistsHandlers } from "./handlers/playlists.js";
+import { createPropsHandlers } from "./handlers/props.js";
+import { createStageHandlers } from "./handlers/stage.js";
+import { createThemesHandlers } from "./handlers/themes.js";
+import { createTransportHandlers } from "./handlers/transport.js";
+import { createGlobalGroupsHandlers } from "./handlers/globalGroups.js";
+import { createMasksHandlers } from "./handlers/masks.js";
 
 // ProPresenter API base client
 class ProPresenterClient {
