@@ -19,6 +19,13 @@ import { MessagesClient } from "./clients/messages.js";
 import { PresentationClient } from "./clients/presentation.js";
 import { StatusClient } from "./clients/status.js";
 import { TimersClient } from "./clients/timers.js";
+import { PlaylistsClient } from "./clients/playlists.js";
+import { PropsClient } from "./clients/props.js";
+import { StageClient } from "./clients/stage.js";
+import { ThemesClient } from "./clients/themes.js";
+import { TransportClient } from "./clients/transport.js";
+import { GlobalGroupsClient } from "./clients/globalGroups.js";
+import { MasksClient } from "./clients/masks.js";
 
 // Import tools
 import { announcementTools } from "./tools/announcement.js";
@@ -32,6 +39,13 @@ import { messagesTools } from "./tools/messages.js";
 import { presentationTools } from "./tools/presentation.js";
 import { statusTools } from "./tools/status.js";
 import { timersTools } from "./tools/timers.js";
+import { playlistsTools } from "./tools/playlists.js";
+import { propsTools } from "./tools/props.js";
+import { stageTools } from "./tools/stage.js";
+import { themesTools } from "./tools/themes.js";
+import { transportTools } from "./tools/transport.js";
+import { globalGroupsTools } from "./tools/globalGroups.js";
+import { masksTools } from "./tools/masks.js";
 
 // Import handlers
 import { createAnnouncementHandlers } from "./handlers/announcement.js";
@@ -46,6 +60,13 @@ import {
   createPresentationHandlers,
   createStatusHandlers,
   createTimersHandlers,
+  createPlaylistsHandlers,
+  createPropsHandlers,
+  createStageHandlers,
+  createThemesHandlers,
+  createTransportHandlers,
+  createGlobalGroupsHandlers,
+  createMasksHandlers,
 } from "./handlers/others.js";
 
 // ProPresenter API base client
@@ -111,6 +132,13 @@ const messagesClient = new MessagesClient(fetchFn);
 const presentationClient = new PresentationClient(fetchFn);
 const statusClient = new StatusClient(fetchFn);
 const timersClient = new TimersClient(fetchFn);
+const playlistsClient = new PlaylistsClient(fetchFn);
+const propsClient = new PropsClient(fetchFn);
+const stageClient = new StageClient(fetchFn);
+const themesClient = new ThemesClient(fetchFn);
+const transportClient = new TransportClient(fetchFn);
+const globalGroupsClient = new GlobalGroupsClient(fetchFn);
+const masksClient = new MasksClient(fetchFn);
 
 // Initialize all handlers
 const announcementHandlers = createAnnouncementHandlers(announcementClient);
@@ -124,6 +152,13 @@ const messagesHandlers = createMessagesHandlers(messagesClient);
 const presentationHandlers = createPresentationHandlers(presentationClient);
 const statusHandlers = createStatusHandlers(statusClient);
 const timersHandlers = createTimersHandlers(timersClient);
+const playlistsHandlers = createPlaylistsHandlers(playlistsClient);
+const propsHandlers = createPropsHandlers(propsClient);
+const stageHandlers = createStageHandlers(stageClient);
+const themesHandlers = createThemesHandlers(themesClient);
+const transportHandlers = createTransportHandlers(transportClient);
+const globalGroupsHandlers = createGlobalGroupsHandlers(globalGroupsClient);
+const masksHandlers = createMasksHandlers(masksClient);
 
 // Combine all handlers
 const allHandlers = {
@@ -138,6 +173,13 @@ const allHandlers = {
   ...presentationHandlers,
   ...statusHandlers,
   ...timersHandlers,
+  ...playlistsHandlers,
+  ...propsHandlers,
+  ...stageHandlers,
+  ...themesHandlers,
+  ...transportHandlers,
+  ...globalGroupsHandlers,
+  ...masksHandlers,
 };
 
 // Combine all tools
@@ -153,6 +195,13 @@ const tools = [
   ...presentationTools,
   ...statusTools,
   ...timersTools,
+  ...playlistsTools,
+  ...propsTools,
+  ...stageTools,
+  ...themesTools,
+  ...transportTools,
+  ...globalGroupsTools,
+  ...masksTools,
 ];
 
 // Handle tool list requests
