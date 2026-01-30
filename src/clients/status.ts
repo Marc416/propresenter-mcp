@@ -15,8 +15,24 @@ export class StatusClient {
     return this.fetch("/v1/status/audience_screens");
   }
 
+  async setAudience(screens: any): Promise<any> {
+    return this.fetch("/v1/status/audience_screens", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(screens),
+    });
+  }
+
   async getStage(): Promise<any> {
     return this.fetch("/v1/status/stage_screens");
+  }
+
+  async setStage(screens: any): Promise<any> {
+    return this.fetch("/v1/status/stage_screens", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(screens),
+    });
   }
 
   async getLayers(): Promise<any> {

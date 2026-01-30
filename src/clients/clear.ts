@@ -18,6 +18,7 @@ export class ClearClient {
   async createGroup(group: any): Promise<any> {
     return this.fetch("/v1/clear/groups", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(group),
     });
   }
@@ -37,6 +38,13 @@ export class ClearClient {
 
   async getGroupIcon(id: string): Promise<any> {
     return this.fetch(`/v1/clear/group/${encodeURIComponent(id)}/icon`);
+  }
+
+  async setGroupIcon(id: string, icon: Blob | Buffer): Promise<any> {
+    return this.fetch(`/v1/clear/group/${encodeURIComponent(id)}/icon`, {
+      method: "PUT",
+      body: icon as BodyInit,
+    });
   }
 
   async triggerGroup(id: string): Promise<any> {
