@@ -1,0 +1,15 @@
+{
+  "servers": {
+    "mcp-propresenter": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/build/index.js"
+      ],
+      "env": {
+        "PROPRESENTER_URL": "http://localhost:50000",
+        "PROPRESENTER_PASSWORD": ""
+      }
+    }
+  }
+}
