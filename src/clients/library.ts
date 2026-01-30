@@ -1,4 +1,5 @@
 // Library API client methods
+// API Group 7: /v1/library (4 endpoints, includes /v1/libraries)
 
 export class LibraryClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

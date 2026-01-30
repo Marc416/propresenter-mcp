@@ -1,4 +1,5 @@
 // Presentation API client methods
+// API Group 16: /v1/presentation (31 endpoints)
 
 export class PresentationClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

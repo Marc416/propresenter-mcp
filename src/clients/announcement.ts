@@ -1,4 +1,5 @@
 // Announcement API client methods
+// API Group 1: /v1/announcement (9 endpoints)
 
 export class AnnouncementClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

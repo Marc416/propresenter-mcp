@@ -1,4 +1,5 @@
 // Messages API client methods
+// API Group 14: /v1/message (7 endpoints, includes /v1/messages)
 
 export class MessagesClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

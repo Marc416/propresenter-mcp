@@ -1,4 +1,5 @@
 // Transport API client methods
+// API Group 24: /v1/transport (10 endpoints)
 
 export class TransportClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

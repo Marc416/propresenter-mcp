@@ -1,4 +1,5 @@
 // Props API client methods
+// API Groups 17-19: /v1/prop, /v1/prop_collection, /v1/props (14 endpoints)
 
 export class PropsClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

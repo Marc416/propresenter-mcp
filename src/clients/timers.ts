@@ -1,4 +1,5 @@
 // Timers API client methods
+// API Group 23: /v1/timer (12 endpoints, includes /v1/timers)
 
 export class TimersClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

@@ -1,4 +1,5 @@
 // Looks API client methods
+// API Group 8: /v1/look (8 endpoints, includes /v1/looks)
 
 export class LooksClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

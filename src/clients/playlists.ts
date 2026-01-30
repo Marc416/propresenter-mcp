@@ -1,4 +1,5 @@
 // Playlists API client methods
+// API Group 15: /v1/playlist (30 endpoints, includes /v1/playlists)
 
 export class PlaylistsClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

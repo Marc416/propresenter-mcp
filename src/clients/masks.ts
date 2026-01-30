@@ -1,4 +1,5 @@
 // Masks API client methods
+// API Group 12: /v1/mask (3 endpoints, includes /v1/masks)
 
 export class MasksClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

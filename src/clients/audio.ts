@@ -1,4 +1,5 @@
 // Audio Playlist API client methods
+// API Group 2: /v1/audio (21 endpoints)
 
 export class AudioClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

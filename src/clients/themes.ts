@@ -1,4 +1,5 @@
 // Themes API client methods
+// API Group 22: /v1/theme (5 endpoints, includes /v1/themes)
 
 export class ThemesClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

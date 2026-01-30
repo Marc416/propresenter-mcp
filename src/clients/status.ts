@@ -1,4 +1,5 @@
 // Status and System API client methods
+// API Group 21: /v1/status (8 endpoints) + Group 27: /version (1 endpoint)
 
 export class StatusClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

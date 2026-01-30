@@ -1,88 +1,176 @@
 # ProPresenter MCP Server
 
-A comprehensive Model Context Protocol (MCP) server that provides tools for controlling ProPresenter presentations via the ProPresenter API. This server implements the full ProPresenter API with over 80 tools organized into modular categories.
+A comprehensive Model Context Protocol (MCP) server that provides complete control over ProPresenter presentations via the ProPresenter API. This server implements the full ProPresenter API specification with **231 endpoints** organized into **27 API groups** and exposed through modular client classes.
 
 ## Features
 
-This MCP server exposes comprehensive control over ProPresenter with the following categories:
+This MCP server provides complete coverage of the ProPresenter API across all major control surfaces:
 
-### 📊 Status & Information (4 tools)
-- Get ProPresenter version and build information
-- Get current status of screens (all, audience, stage)
+### 📊 Status & System (API Groups 21, 27)
+- Get ProPresenter version and build information (Group 27: /version)
+- Get/set audience and stage screen status (Group 21: /v1/status)
 - Get layer status information
+- Get slide/cue information
+- Aggregate status updates from multiple endpoints
 
-### 🎬 Presentation Controls (10 tools)
+### 🎬 Presentation Controls (API Group 16)
+- **31 endpoints** for complete presentation control
 - Get focused/active presentations
-- Get current slide index
+- Get current slide index and chord charts
 - Focus and trigger presentations
 - Navigate through slides (next, previous, by index)
 - Timeline operations (play, pause, rewind)
-- Timeline status monitoring
+- Group-based triggering
+- Thumbnail generation for any slide
 
-### 📢 Announcement Controls (9 tools)
-- Get active announcements
-- Get announcement slide index
+### 📢 Announcement Controls (API Group 1)
+- **9 endpoints** for announcement management
+- Get active announcements and slide index
 - Focus and trigger announcements
 - Navigate through announcement cues
 - Timeline operations for announcements
-- Timeline status monitoring
 
-### 🎵 Audio Playlists (16 tools)
-- List all audio playlists
+### 🎵 Audio & Media Playlists (API Groups 2, 13)
+- **21 audio endpoints** + **22 media endpoints**
+- List and manage playlists
 - Get playlist contents with pagination
-- Get focused/active playlists
 - Focus playlists (next, previous, specific, active)
-- Trigger playlists and playlist items
+- Trigger playlists and individual items
+- Real-time playlist updates
 - Navigate through playlist items
 
-### 📹 Capture Controls (4 tools)
+### 📋 Presentation Playlists (API Group 15)
+- **30 endpoints** for playlist management
+- Complete CRUD operations for playlists
+- Focus management (active, focused, next, previous)
+- Separate presentation/announcement destinations
+- Trigger items by index
+- Thumbnail generation
+- Real-time playlist change updates
+
+### 📹 Capture Controls (API Group 3)
+- **4 endpoints** for recording control
 - Get capture status and time
 - Start/stop capture operations
 - Get capture settings
 - Get available capture encodings (disk, RTMP, Resi)
 
-### 🧹 Clear Controls (4 tools)
+### 🧹 Clear Controls (API Group 4)
+- **9 endpoints** for clearing layers
 - Clear specific layers (audio, props, messages, announcements, slide, media, video_input)
-- List all clear groups
-- Get clear group details
+- Full CRUD operations for clear groups
+- Custom group icons
 - Trigger clear groups
 
-### 📚 Library Controls (4 tools)
+### 📚 Library Controls (API Group 7)
+- **4 endpoints** for library access
 - List all configured libraries
 - Get library contents
 - Trigger presentations from libraries
 - Trigger specific cues in library presentations
 
-### 👁️ Looks (Audience Screens) (4 tools)
+### 👁️ Looks (API Group 8)
+- **8 endpoints** for audience screen control
 - List all configured looks
-- Get current live look
-- Get specific look details
+- Get/set current live look
+- Full CRUD operations for looks
 - Trigger looks to make them live
 
-### ⚙️ Macros (3 tools)
+### ⚙️ Macros (API Groups 9-11)
+- **12 endpoints** for macro automation
 - List all configured macros
-- Get macro details
+- Full CRUD for macros and macro collections
+- Custom macro icons
 - Trigger macros
 
-### 💬 Messages (6 tools)
-- List all messages
-- Get message details
-- Show/hide messages
-- Trigger messages
-- Clear messages
+### 🎭 Props (API Groups 17-19)
+- **14 endpoints** for prop management
+- Full CRUD for props and prop collections
+- Trigger and clear props
+- Auto-clear timer control (pause/resume)
+- Prop thumbnails
 
-### ⏱️ Timers (5 tools)
-- List all timers
-- Get timer details
-- Start/stop/reset timers
+### 📱 Stage Displays (API Group 20)
+- **11 endpoints** for stage screen control
+- Show/hide stage messages
+- Get/set stage layout maps
+- Manage stage screens and layouts
+- Layout thumbnails
+
+### 💬 Messages (API Group 14)
+- **7 endpoints** for message control
+- Full CRUD operations for messages
+- Show/hide messages with token support
+- Clear all messages
+
+### ⏱️ Timers (API Group 23)
+- **12 endpoints** for timer management
+- Full CRUD operations for timers
+- Start/stop/reset operations
+- Get system time and video countdown
+- Increment timer values
+- Get all timer states
+
+### 🎨 Themes (API Group 22)
+- **5 endpoints** for theme management
+- List all themes and theme slides
+- Get/set theme slide details
+- Theme slide thumbnails
+
+### 🎭 Masks (API Group 12)
+- **3 endpoints** for mask control
+- List all configured masks
+- Get mask details
+- Mask thumbnails
+
+### 🎮 Transport Controls (API Group 24)
+- **10 endpoints** for media transport
+- Play/pause controls for presentation, announcement, and audio layers
+- Skip forward/backward by time
+- Get/set playback time
+- Go to end
+- Auto-advance control
+
+### 🔧 Global Groups (API Group 6)
+- **1 endpoint** for global group management
+- List all configured global groups
+
+### 🎯 Trigger Controls (API Group 25)
+- **6 endpoints** for quick triggering
+- Trigger next/previous for audio and media
+- Universal next/previous for active content
+
+### 📹 Video Inputs (API Group 26)
+- **2 endpoints** for video input control
+- List video inputs playlist
+- Trigger video inputs
 
 ## Architecture
 
-The codebase is organized into a modular structure for maintainability:
+The codebase is organized into a modular structure with complete API coverage:
 
 ```
 src/
-├── clients/       # API client classes for each endpoint group
+├── clients/          # API client classes (18 modules, 231 endpoints)
+│   ├── announcement.ts    # Group 1: 9 endpoints
+│   ├── audio.ts           # Group 2: 21 endpoints
+│   ├── capture.ts         # Group 3: 4 endpoints
+│   ├── clear.ts           # Group 4: 9 endpoints
+│   ├── globalGroups.ts    # Group 6: 1 endpoint
+│   ├── library.ts         # Group 7: 4 endpoints
+│   ├── looks.ts           # Group 8: 8 endpoints
+│   ├── macros.ts          # Groups 9-11: 12 endpoints
+│   ├── masks.ts           # Group 12: 3 endpoints
+│   ├── messages.ts        # Group 14: 7 endpoints
+│   ├── playlists.ts       # Group 15: 30 endpoints
+│   ├── presentation.ts    # Group 16: 31 endpoints
+│   ├── props.ts           # Groups 17-19: 14 endpoints
+│   ├── stage.ts           # Group 20: 11 endpoints
+│   ├── status.ts          # Groups 21+27: 9 endpoints
+│   ├── themes.ts          # Group 22: 5 endpoints
+│   ├── timers.ts          # Group 23: 12 endpoints
+│   └── transport.ts       # Group 24: 10 endpoints
+├── tools/         # MCP tool definitions for each group
 │   ├── announcement.ts
 │   ├── audio.ts
 │   ├── capture.ts
@@ -94,10 +182,19 @@ src/
 │   ├── presentation.ts
 │   ├── status.ts
 │   └── timers.ts
-├── tools/         # MCP tool definitions for each group
+├── handlers/      # Request handlers for each group
 │   ├── announcement.ts
 │   ├── audio.ts
-│   ├── capture.ts
+│   └── others.ts
+└── index.ts       # Main server entry point
+
+api/
+├── swagger.json   # OpenAPI 3.0.2 spec (9793 lines)
+├── api.md         # Generated API documentation (27 groups)
+└── api.py         # API documentation generator
+```
+
+Each client module includes a comment header referencing its API group number for easy cross-reference with the complete API documentation in `api/api.md`.
 │   ├── clear.ts
 │   ├── library.ts
 │   ├── looks.ts
@@ -189,61 +286,115 @@ Once connected, you can ask Claude to control ProPresenter:
 **Status & Information:**
 - "What version of ProPresenter is running?"
 - "Show me the status of all screens"
-- "What layers are currently active?"
+- "What's the status of audience screens?"
+- "Get the current slide information"
 
 **Presentations:**
-- "List all available presentations"
-- "Trigger the presentation called 'Sunday Service'"
 - "What presentation is currently active?"
+- "Trigger the presentation with UUID [uuid]"
 - "Go to the next slide"
 - "Go to slide number 5"
 - "Play the presentation timeline"
+- "Show me the chord chart"
+- "Get a thumbnail of slide 3"
 
 **Announcements:**
 - "What announcement is currently active?"
 - "Trigger the next announcement cue"
 - "Show me the announcement timeline status"
+- "Go to announcement cue 2"
 
-**Audio:**
+**Audio & Media:**
 - "List all audio playlists"
-- "Show me the contents of the 'Worship' playlist"
+- "Show me the contents of audio playlist [id]"
 - "Play the next song in the active playlist"
 - "Trigger the focused audio playlist"
+- "List all media playlists"
+- "Trigger media item [id] in playlist [playlist_id]"
+
+**Playlists:**
+- "List all presentation playlists"
+- "Show me the active playlist"
+- "Focus the next playlist"
+- "Trigger the first item in the focused playlist"
+- "Create a new playlist called 'Sunday Service'"
 
 **Capture:**
 - "What's the current capture status?"
 - "Start recording"
 - "Stop the capture"
-- "Show me the capture settings"
+- "Show me available capture encodings for RTMP"
 
 **Clear:**
 - "Clear the announcements layer"
 - "Show me all clear groups"
-- "Trigger the clear group called 'Reset All'"
+- "Trigger the clear group [id]"
+- "Create a new clear group"
 
 **Library:**
 - "List all my libraries"
-- "Show presentations in the 'Sunday Service' library"
-- "Trigger 'Amazing Grace' from the hymns library"
+- "Show presentations in library [id]"
+- "Trigger presentation [id] from library [library_id]"
 
 **Looks:**
 - "Show me all configured looks"
 - "What look is currently live?"
-- "Switch to the 'Main Screens' look"
+- "Switch to look [id]"
+- "Create a new look"
 
 **Macros:**
 - "List all macros"
-- "Trigger the 'Start Service' macro"
+- "Trigger macro [id]"
+- "Show me all macro collections"
+- "Create a new macro"
+
+**Props:**
+- "List all props"
+- "Trigger prop [id]"
+- "Clear prop [id]"
+- "Pause auto-clear for prop [id]"
+- "List all prop collections"
+
+**Stage:**
+- "Show me the current stage message"
+- "Display stage message [message]"
+- "Hide the stage message"
+- "List all stage layouts"
+- "Set stage layout [layout_id] for screen [screen_id]"
 
 **Messages:**
 - "Show me all messages"
-- "Display the 'Welcome' message"
-- "Hide all messages"
+- "Display message [id]"
+- "Hide message [id]"
+- "Create a new message"
 
 **Timers:**
 - "List all timers"
-- "Start the countdown timer"
+- "Start timer [id]"
+- "Stop timer [id]"
 - "Reset the sermon timer"
+- "Create a countdown timer"
+- "Get the current system time"
+
+**Themes:**
+- "List all themes"
+- "Show me details of theme [id]"
+- "Get theme slide [slide_id] from theme [theme_id]"
+
+**Transport:**
+- "Play the presentation layer"
+- "Pause the audio layer"
+- "Skip forward 30 seconds on the announcement layer"
+- "Go to the end of the presentation"
+- "Get the current playback time"
+
+**Masks:**
+- "List all masks"
+- "Show me details of mask [id]"
+
+**Triggers:**
+- "Trigger the next cue"
+- "Trigger the previous media item"
 
 ## Development
 
@@ -259,7 +410,43 @@ npm run watch
 
 ## API Reference
 
-This server uses the ProPresenter API documented at https://openapi.propresenter.com/
+This server implements the complete ProPresenter API documented at https://openapi.propresenter.com/
+
+### API Coverage
+
+- **Total Endpoints**: 231 REST API endpoints
+- **API Groups**: 27 functional groups
+- **Client Modules**: 18 TypeScript client classes
+- **HTTP Methods**: Full support for GET, POST, PUT, DELETE operations
+
+See `api/api.md` for complete API documentation with all 231 endpoints organized by group.
+
+### API Groups Reference
+
+| Group | Path | Client Module | Endpoints |
+|-------|------|---------------|-----------|
+| 1 | /v1/announcement | AnnouncementClient | 9 |
+| 2 | /v1/audio | AudioClient | 21 |
+| 3 | /v1/capture | CaptureClient | 4 |
+| 4 | /v1/clear | ClearClient | 9 |
+| 6 | /v1/group | GlobalGroupsClient | 1 |
+| 7 | /v1/library | LibraryClient | 4 |
+| 8 | /v1/look | LooksClient | 8 |
+| 9-11 | /v1/macro* | MacrosClient | 12 |
+| 12 | /v1/mask | MasksClient | 3 |
+| 14 | /v1/message | MessagesClient | 7 |
+| 15 | /v1/playlist | PlaylistsClient | 30 |
+| 16 | /v1/presentation | PresentationClient | 31 |
+| 17-19 | /v1/prop* | PropsClient | 14 |
+| 20 | /v1/stage | StageClient | 11 |
+| 21 | /v1/status | StatusClient | 8 |
+| 22 | /v1/theme | ThemesClient | 5 |
+| 23 | /v1/timer | TimersClient | 12 |
+| 24 | /v1/transport | TransportClient | 10 |
+| 27 | /version | StatusClient | 1 |
+
+*Groups 9-11 include /v1/macro, /v1/macro_collection, and /v1/macros  
+*Groups 17-19 include /v1/prop, /v1/prop_collection, and /v1/props
 
 ## Troubleshooting
 

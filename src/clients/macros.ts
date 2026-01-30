@@ -1,4 +1,5 @@
 // Macros API client methods
+// API Groups 9-11: /v1/macro, /v1/macro_collection, /v1/macros (12 endpoints)
 
 export class MacrosClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

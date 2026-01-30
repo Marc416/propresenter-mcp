@@ -1,4 +1,5 @@
 // Clear API client methods
+// API Group 4: /v1/clear (9 endpoints)
 
 export class ClearClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

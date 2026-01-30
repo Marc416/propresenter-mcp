@@ -1,4 +1,5 @@
 // Stage API client methods
+// API Group 20: /v1/stage (11 endpoints)
 
 export class StageClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}

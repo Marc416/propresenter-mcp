@@ -1,4 +1,5 @@
 // Capture API client methods
+// API Group 3: /v1/capture (4 endpoints)
 
 export class CaptureClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}
