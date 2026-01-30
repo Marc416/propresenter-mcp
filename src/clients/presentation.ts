@@ -1,5 +1,7 @@
 // Presentation API client methods
 // API Group 16: /v1/presentation (31 endpoints)
+// API Group 25: /v1/trigger (2 endpoints: next, previous)
+// Total: 33 methods
 
 export class PresentationClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}
