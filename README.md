@@ -1,38 +1,117 @@
 # ProPresenter MCP Server
 
-A Model Context Protocol (MCP) server that provides tools for controlling ProPresenter presentations via the ProPresenter API.
+A comprehensive Model Context Protocol (MCP) server that provides tools for controlling ProPresenter presentations via the ProPresenter API. This server implements the full ProPresenter API with over 80 tools organized into modular categories.
 
 ## Features
 
-This MCP server exposes the following capabilities:
+This MCP server exposes comprehensive control over ProPresenter with the following categories:
 
-### Status & Information
-- **get_propresenter_version** - Get ProPresenter version and build information
-- **get_screen_status** - Get current status of all screens
-- **list_presentations** - List all available presentations in the library
+### 📊 Status & Information (4 tools)
+- Get ProPresenter version and build information
+- Get current status of screens (all, audience, stage)
+- Get layer status information
 
-### Presentation Controls
-- **trigger_presentation** - Trigger a specific presentation by path, optionally starting at a specific slide
-- **focus_presentation** - Focus a presentation without triggering it
+### 🎬 Presentation Controls (10 tools)
+- Get focused/active presentations
+- Get current slide index
+- Focus and trigger presentations
+- Navigate through slides (next, previous, by index)
+- Timeline operations (play, pause, rewind)
+- Timeline status monitoring
 
-### Slide Controls
-- **trigger_next_slide** - Advance to the next slide
-- **trigger_previous_slide** - Go back to the previous slide
-- **trigger_slide_by_index** - Jump to a specific slide by index
+### 📢 Announcement Controls (9 tools)
+- Get active announcements
+- Get announcement slide index
+- Focus and trigger announcements
+- Navigate through announcement cues
+- Timeline operations for announcements
+- Timeline status monitoring
 
-### Layer Controls
-- **clear_all** - Clear all layers (video, audio, props, announcements)
-- **clear_layer** - Clear a specific layer
+### 🎵 Audio Playlists (16 tools)
+- List all audio playlists
+- Get playlist contents with pagination
+- Get focused/active playlists
+- Focus playlists (next, previous, specific, active)
+- Trigger playlists and playlist items
+- Navigate through playlist items
 
-### Timer Controls
-- **get_timers** - Get all timers and their current states
-- **start_timer** - Start a specific timer
-- **stop_timer** - Stop a specific timer
-- **reset_timer** - Reset a specific timer
+### 📹 Capture Controls (4 tools)
+- Get capture status and time
+- Start/stop capture operations
+- Get capture settings
+- Get available capture encodings (disk, RTMP, Resi)
 
-### Message Controls
-- **show_message** - Display a specific message
-- **hide_messages** - Hide all currently displayed messages
+### 🧹 Clear Controls (4 tools)
+- Clear specific layers (audio, props, messages, announcements, slide, media, video_input)
+- List all clear groups
+- Get clear group details
+- Trigger clear groups
+
+### 📚 Library Controls (4 tools)
+- List all configured libraries
+- Get library contents
+- Trigger presentations from libraries
+- Trigger specific cues in library presentations
+
+### 👁️ Looks (Audience Screens) (4 tools)
+- List all configured looks
+- Get current live look
+- Get specific look details
+- Trigger looks to make them live
+
+### ⚙️ Macros (3 tools)
+- List all configured macros
+- Get macro details
+- Trigger macros
+
+### 💬 Messages (6 tools)
+- List all messages
+- Get message details
+- Show/hide messages
+- Trigger messages
+- Clear messages
+
+### ⏱️ Timers (5 tools)
+- List all timers
+- Get timer details
+- Start/stop/reset timers
+
+## Architecture
+
+The codebase is organized into a modular structure for maintainability:
+
+```
+src/
+├── clients/       # API client classes for each endpoint group
+│   ├── announcement.ts
+│   ├── audio.ts
+│   ├── capture.ts
+│   ├── clear.ts
+│   ├── library.ts
+│   ├── looks.ts
+│   ├── macros.ts
+│   ├── messages.ts
+│   ├── presentation.ts
+│   ├── status.ts
+│   └── timers.ts
+├── tools/         # MCP tool definitions for each group
+│   ├── announcement.ts
+│   ├── audio.ts
+│   ├── capture.ts
+│   ├── clear.ts
+│   ├── library.ts
+│   ├── looks.ts
+│   ├── macros.ts
+│   ├── messages.ts
+│   ├── presentation.ts
+│   ├── status.ts
+│   └── timers.ts
+├── handlers/      # Request handlers for each group
+│   ├── announcement.ts
+│   ├── audio.ts
+│   └── others.ts
+└── index.ts       # Main server entry point
+```
 
 ## Prerequisites
 
@@ -105,14 +184,66 @@ This server can be debugged directly in VS Code using the included MCP configura
 
 ## Example Commands
 
-Once connected, you can ask Claude to:
+Once connected, you can ask Claude to control ProPresenter:
 
-- "Show me the ProPresenter version"
+**Status & Information:**
+- "What version of ProPresenter is running?"
+- "Show me the status of all screens"
+- "What layers are currently active?"
+
+**Presentations:**
 - "List all available presentations"
 - "Trigger the presentation called 'Sunday Service'"
+- "What presentation is currently active?"
 - "Go to the next slide"
+- "Go to slide number 5"
+- "Play the presentation timeline"
+
+**Announcements:**
+- "What announcement is currently active?"
+- "Trigger the next announcement cue"
+- "Show me the announcement timeline status"
+
+**Audio:**
+- "List all audio playlists"
+- "Show me the contents of the 'Worship' playlist"
+- "Play the next song in the active playlist"
+- "Trigger the focused audio playlist"
+
+**Capture:**
+- "What's the current capture status?"
+- "Start recording"
+- "Stop the capture"
+- "Show me the capture settings"
+
+**Clear:**
+- "Clear the announcements layer"
+- "Show me all clear groups"
+- "Trigger the clear group called 'Reset All'"
+
+**Library:**
+- "List all my libraries"
+- "Show presentations in the 'Sunday Service' library"
+- "Trigger 'Amazing Grace' from the hymns library"
+
+**Looks:**
+- "Show me all configured looks"
+- "What look is currently live?"
+- "Switch to the 'Main Screens' look"
+
+**Macros:**
+- "List all macros"
+- "Trigger the 'Start Service' macro"
+
+**Messages:**
+- "Show me all messages"
+- "Display the 'Welcome' message"
+- "Hide all messages"
+
+**Timers:**
+- "List all timers"
 - "Start the countdown timer"
-- "Clear all layers"
+- "Reset the sermon timer"
 
 ## Development
 
