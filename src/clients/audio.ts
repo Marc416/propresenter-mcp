@@ -12,6 +12,10 @@ export class AudioClient {
     return this.fetch(`/v1/audio/playlist/${encodeURIComponent(playlistId)}${params}`);
   }
 
+  async getPlaylistUpdates(playlistId: string): Promise<any> {
+    return this.fetch(`/v1/audio/playlist/${encodeURIComponent(playlistId)}/updates`);
+  }
+
   async getFocusedPlaylist(): Promise<any> {
     return this.fetch("/v1/audio/playlist/focused");
   }

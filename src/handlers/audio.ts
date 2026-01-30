@@ -17,6 +17,13 @@ export function createAudioHandlers(client: AudioClient) {
       };
     },
 
+    audio_get_playlist_updates: async (args: { playlistId: string }) => {
+      const result = await client.getPlaylistUpdates(args.playlistId);
+      return {
+        content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+      };
+    },
+
     audio_get_focused_playlist: async () => {
       const result = await client.getFocusedPlaylist();
       return {

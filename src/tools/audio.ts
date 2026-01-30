@@ -29,6 +29,20 @@ export const audioTools: Tool[] = [
     },
   },
   {
+    name: "audio_get_playlist_updates",
+    description: "Subscribe to updates for a specific audio playlist (chunked response)",
+    inputSchema: {
+      type: "object",
+      properties: {
+        playlistId: {
+          type: "string",
+          description: "The ID of the playlist (UUID, name, or index)",
+        },
+      },
+      required: ["playlistId"],
+    },
+  },
+  {
     name: "audio_get_focused_playlist",
     description: "Get the currently focused audio playlist",
     inputSchema: {
