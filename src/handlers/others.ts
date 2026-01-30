@@ -202,6 +202,62 @@ export function createPresentationHandlers(client: PresentationClient) {
       const result = await client.getTimelineStatus();
       return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
     },
+    get_focused_timeline_status: async () => {
+      const result = await client.getFocusedTimelineStatus();
+      return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
+    },
+    focused_timeline_operation: async (args: { operation: "play" | "pause" | "rewind" }) => {
+      await client.focusedTimelineOperation(args.operation);
+      return { content: [{ type: "text" as const, text: `Focused presentation timeline: ${args.operation}` }] };
+    },
+    presentation_timeline_operation: async (args: { presentationUuid: string; operation: "play" | "pause" | "rewind" }) => {
+      await client.presentationTimelineOperation(args.presentationUuid, args.operation);
+      return { content: [{ type: "text" as const, text: `Presentation ${args.presentationUuid} timeline: ${args.operation}` }] };
+    },
+    get_presentation: async (args: { presentationUuid: string }) => {
+      const result = await client.getPresentation(args.presentationUuid);
+      return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
+    },
+    get_presentation_thumbnail: async (args: { presentationUuid: string; index: number; quality?: number }) => {
+      const result = await client.getPresentationThumbnail(args.presentationUuid, args.index, args.quality);
+      return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
+    },
+    focus_next_presentation: async () => {
+      await client.focusNext();
+      return { content: [{ type: "text" as const, text: "Focused next presentation" }] };
+    },
+    focus_previous_presentation: async () => {
+      await client.focusPrevious();
+      return { content: [{ type: "text" as const, text: "Focused previous presentation" }] };
+    },
+    trigger_presentation_next: async (args: { presentationUuid: string }) => {
+      await client.triggerPresentationNext(args.presentationUuid);
+      return { content: [{ type: "text" as const, text: `Triggered next in presentation ${args.presentationUuid}` }] };
+    },
+    trigger_presentation_previous: async (args: { presentationUuid: string }) => {
+      await client.triggerPresentationPrevious(args.presentationUuid);
+      return { content: [{ type: "text" as const, text: `Triggered previous in presentation ${args.presentationUuid}` }] };
+    },
+    trigger_focused_group: async (args: { groupId: string }) => {
+      await client.triggerFocusedGroup(args.groupId);
+      return { content: [{ type: "text" as const, text: `Triggered group ${args.groupId} in focused presentation` }] };
+    },
+    trigger_active_group: async (args: { groupId: string }) => {
+      await client.triggerActiveGroup(args.groupId);
+      return { content: [{ type: "text" as const, text: `Triggered group ${args.groupId} in active presentation` }] };
+    },
+    trigger_presentation_group: async (args: { presentationUuid: string; groupId: string }) => {
+      await client.triggerPresentationGroup(args.presentationUuid, args.groupId);
+      return { content: [{ type: "text" as const, text: `Triggered group ${args.groupId} in presentation ${args.presentationUuid}` }] };
+    },
+    get_chord_chart: async () => {
+      const result = await client.getChordChart();
+      return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
+    },
+    get_chord_chart_updates: async () => {
+      const result = await client.getChordChartUpdates();
+      return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
+    },
   };
 }
 

@@ -78,4 +78,61 @@ export class PresentationClient {
   async getTimelineStatus(): Promise<any> {
     return this.fetch("/v1/presentation/active/timeline");
   }
+
+  async getFocusedTimelineStatus(): Promise<any> {
+    return this.fetch("/v1/presentation/focused/timeline");
+  }
+
+  async focusedTimelineOperation(operation: "play" | "pause" | "rewind"): Promise<any> {
+    return this.fetch(`/v1/presentation/focused/timeline/${operation}`);
+  }
+
+  async presentationTimelineOperation(uuid: string, operation: "play" | "pause" | "rewind"): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/timeline/${operation}`);
+  }
+
+  async getPresentation(uuid: string): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}`);
+  }
+
+  async getPresentationThumbnail(uuid: string, index: number, quality?: number): Promise<any> {
+    const params = quality !== undefined ? `?quality=${quality}` : "";
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/thumbnail/${index}${params}`);
+  }
+
+  async focusNext(): Promise<any> {
+    return this.fetch("/v1/presentation/next/focus");
+  }
+
+  async focusPrevious(): Promise<any> {
+    return this.fetch("/v1/presentation/previous/focus");
+  }
+
+  async triggerPresentationNext(uuid: string): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/next/trigger`);
+  }
+
+  async triggerPresentationPrevious(uuid: string): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/previous/trigger`);
+  }
+
+  async triggerFocusedGroup(groupId: string): Promise<any> {
+    return this.fetch(`/v1/presentation/focused/group/${encodeURIComponent(groupId)}/trigger`);
+  }
+
+  async triggerActiveGroup(groupId: string): Promise<any> {
+    return this.fetch(`/v1/presentation/active/group/${encodeURIComponent(groupId)}/trigger`);
+  }
+
+  async triggerPresentationGroup(uuid: string, groupId: string): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/group/${encodeURIComponent(groupId)}/trigger`);
+  }
+
+  async getChordChart(): Promise<any> {
+    return this.fetch("/v1/presentation/chord_chart");
+  }
+
+  async getChordChartUpdates(): Promise<any> {
+    return this.fetch("/v1/presentation/chord_chart/updates");
+  }
 }

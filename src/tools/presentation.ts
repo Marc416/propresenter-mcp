@@ -169,4 +169,188 @@ export const presentationTools: Tool[] = [
       properties: {},
     },
   },
+  {
+    name: "get_focused_timeline_status",
+    description: "Get the current timeline status of the focused presentation",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
+  {
+    name: "focused_timeline_operation",
+    description: "Perform timeline operation (play, pause, rewind) on focused presentation",
+    inputSchema: {
+      type: "object",
+      properties: {
+        operation: {
+          type: "string",
+          enum: ["play", "pause", "rewind"],
+          description: "The timeline operation to perform",
+        },
+      },
+      required: ["operation"],
+    },
+  },
+  {
+    name: "presentation_timeline_operation",
+    description: "Perform timeline operation on a specific presentation by UUID",
+    inputSchema: {
+      type: "object",
+      properties: {
+        presentationUuid: {
+          type: "string",
+          description: "The UUID of the presentation",
+        },
+        operation: {
+          type: "string",
+          enum: ["play", "pause", "rewind"],
+          description: "The timeline operation to perform",
+        },
+      },
+      required: ["presentationUuid", "operation"],
+    },
+  },
+  {
+    name: "get_presentation",
+    description: "Get details of a specific presentation by UUID",
+    inputSchema: {
+      type: "object",
+      properties: {
+        presentationUuid: {
+          type: "string",
+          description: "The UUID of the presentation",
+        },
+      },
+      required: ["presentationUuid"],
+    },
+  },
+  {
+    name: "get_presentation_thumbnail",
+    description: "Get a thumbnail for a specific slide in a presentation",
+    inputSchema: {
+      type: "object",
+      properties: {
+        presentationUuid: {
+          type: "string",
+          description: "The UUID of the presentation",
+        },
+        index: {
+          type: "number",
+          description: "The slide index (0-based)",
+        },
+        quality: {
+          type: "number",
+          description: "Optional quality setting for the thumbnail",
+        },
+      },
+      required: ["presentationUuid", "index"],
+    },
+  },
+  {
+    name: "focus_next_presentation",
+    description: "Focus the next presentation",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
+  {
+    name: "focus_previous_presentation",
+    description: "Focus the previous presentation",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
+  {
+    name: "trigger_presentation_next",
+    description: "Trigger the next cue in a specific presentation by UUID",
+    inputSchema: {
+      type: "object",
+      properties: {
+        presentationUuid: {
+          type: "string",
+          description: "The UUID of the presentation",
+        },
+      },
+      required: ["presentationUuid"],
+    },
+  },
+  {
+    name: "trigger_presentation_previous",
+    description: "Trigger the previous cue in a specific presentation by UUID",
+    inputSchema: {
+      type: "object",
+      properties: {
+        presentationUuid: {
+          type: "string",
+          description: "The UUID of the presentation",
+        },
+      },
+      required: ["presentationUuid"],
+    },
+  },
+  {
+    name: "trigger_focused_group",
+    description: "Trigger a specific group in the focused presentation",
+    inputSchema: {
+      type: "object",
+      properties: {
+        groupId: {
+          type: "string",
+          description: "The ID of the group to trigger",
+        },
+      },
+      required: ["groupId"],
+    },
+  },
+  {
+    name: "trigger_active_group",
+    description: "Trigger a specific group in the active presentation",
+    inputSchema: {
+      type: "object",
+      properties: {
+        groupId: {
+          type: "string",
+          description: "The ID of the group to trigger",
+        },
+      },
+      required: ["groupId"],
+    },
+  },
+  {
+    name: "trigger_presentation_group",
+    description: "Trigger a specific group in a presentation by UUID",
+    inputSchema: {
+      type: "object",
+      properties: {
+        presentationUuid: {
+          type: "string",
+          description: "The UUID of the presentation",
+        },
+        groupId: {
+          type: "string",
+          description: "The ID of the group to trigger",
+        },
+      },
+      required: ["presentationUuid", "groupId"],
+    },
+  },
+  {
+    name: "get_chord_chart",
+    description: "Get the current chord chart information",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
+  {
+    name: "get_chord_chart_updates",
+    description: "Get chord chart updates",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
 ];
