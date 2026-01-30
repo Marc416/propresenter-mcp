@@ -4,16 +4,19 @@ export class PresentationClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}
 
   async getPresentations(): Promise<any> {
-    return this.fetch("/v1/library");
+    return this.fetch("/v1/libraries");
   }
 
-  async triggerPresentation(presentationPath: string, index?: number): Promise<any> {
-    const params = index !== undefined ? `?index=${index}` : "";
-    return this.fetch(`/v1/presentation/${encodeURIComponent(presentationPath)}/trigger${params}`);
+  async triggerPresentation(uuid: string): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/trigger`);
   }
 
-  async focusPresentation(presentationPath: string): Promise<any> {
-    return this.fetch(`/v1/presentation/${encodeURIComponent(presentationPath)}/focus`);
+  async triggerPresentationCue(uuid: string, index: number): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/${index}/trigger`);
+  }
+
+  async focusPresentation(uuid: string): Promise<any> {
+    return this.fetch(`/v1/presentation/${encodeURIComponent(uuid)}/focus`);
   }
 
   async triggerNext(): Promise<any> {
@@ -24,8 +27,20 @@ export class PresentationClient {
     return this.fetch("/v1/trigger/previous");
   }
 
-  async triggerSlide(index: number): Promise<any> {
-    return this.fetch(`/v1/trigger/slide/${index}`);
+  async triggerFocused(): Promise<any> {
+    return this.fetch("/v1/presentation/focused/trigger");
+  }
+
+  async triggerFocusedNext(): Promise<any> {
+    return this.fetch("/v1/presentation/focused/next/trigger");
+  }
+
+  async triggerFocusedPrevious(): Promise<any> {
+    return this.fetch("/v1/presentation/focused/previous/trigger");
+  }
+
+  async triggerFocusedCue(index: number): Promise<any> {
+    return this.fetch(`/v1/presentation/focused/${index}/trigger`);
   }
 
   async getFocused(): Promise<any> {

@@ -120,14 +120,6 @@ export function createMessagesHandlers(client: MessagesClient) {
       const result = await client.get(args.messageId);
       return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
     },
-    messages_show: async (args: { messageId: string }) => {
-      await client.show(args.messageId);
-      return { content: [{ type: "text" as const, text: `Showed message: ${args.messageId}` }] };
-    },
-    messages_hide: async () => {
-      await client.hide();
-      return { content: [{ type: "text" as const, text: "Hid all messages" }] };
-    },
     messages_trigger: async (args: { messageId: string }) => {
       await client.trigger(args.messageId);
       return { content: [{ type: "text" as const, text: `Triggered message: ${args.messageId}` }] };
@@ -141,43 +133,76 @@ export function createMessagesHandlers(client: MessagesClient) {
 
 export function createPresentationHandlers(client: PresentationClient) {
   return {
-    presentation_get_focused: async () => {
+    list_presentations: async () => {
+      const result = await client.getPresentations();
+      return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
+    },
+    trigger_presentation: async (args: { presentationUuid: string; index?: number }) => {
+      if (args.index !== undefined) {
+        await client.triggerPresentationCue(args.presentationUuid, args.index);
+        return { content: [{ type: "text" as const, text: `Triggered presentation ${args.presentationUuid} at index ${args.index}` }] };
+      } else {
+        await client.triggerPresentation(args.presentationUuid);
+        return { content: [{ type: "text" as const, text: `Triggered presentation ${args.presentationUuid}` }] };
+      }
+    },
+    focus_presentation: async (args: { presentationUuid: string }) => {
+      await client.focusPresentation(args.presentationUuid);
+      return { content: [{ type: "text" as const, text: `Focused presentation ${args.presentationUuid}` }] };
+    },
+    get_focused_presentation: async () => {
       const result = await client.getFocused();
       return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
     },
-    presentation_get_active: async () => {
+    get_active_presentation: async () => {
       const result = await client.getActive();
       return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
     },
-    presentation_get_slide_index: async () => {
+    get_active_slide_index: async () => {
       const result = await client.getSlideIndex();
       return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
     },
-    presentation_focus_active: async () => {
+    focus_active_presentation: async () => {
       await client.focusActive();
       return { content: [{ type: "text" as const, text: "Focused active presentation" }] };
     },
-    presentation_trigger_active: async () => {
+    trigger_active_presentation: async () => {
       await client.triggerActive();
       return { content: [{ type: "text" as const, text: "Triggered active presentation" }] };
     },
-    presentation_trigger_next: async () => {
+    trigger_focused_presentation: async () => {
+      await client.triggerFocused();
+      return { content: [{ type: "text" as const, text: "Triggered focused presentation" }] };
+    },
+    trigger_next_slide: async () => {
       await client.triggerActiveNext();
-      return { content: [{ type: "text" as const, text: "Triggered next presentation cue" }] };
+      return { content: [{ type: "text" as const, text: "Triggered next slide" }] };
     },
-    presentation_trigger_previous: async () => {
+    trigger_previous_slide: async () => {
       await client.triggerActivePrevious();
-      return { content: [{ type: "text" as const, text: "Triggered previous presentation cue" }] };
+      return { content: [{ type: "text" as const, text: "Triggered previous slide" }] };
     },
-    presentation_trigger_cue: async (args: { index: number }) => {
-      await client.triggerActiveCue(args.index);
-      return { content: [{ type: "text" as const, text: `Triggered presentation cue ${args.index}` }] };
+    trigger_focused_next: async () => {
+      await client.triggerFocusedNext();
+      return { content: [{ type: "text" as const, text: "Triggered next in focused presentation" }] };
     },
-    presentation_timeline_operation: async (args: { operation: "play" | "pause" | "rewind" }) => {
+    trigger_focused_previous: async () => {
+      await client.triggerFocusedPrevious();
+      return { content: [{ type: "text" as const, text: "Triggered previous in focused presentation" }] };
+    },
+    trigger_presentation_cue: async (args: { presentationUuid: string; index: number }) => {
+      await client.triggerPresentationCue(args.presentationUuid, args.index);
+      return { content: [{ type: "text" as const, text: `Triggered cue ${args.index} in presentation ${args.presentationUuid}` }] };
+    },
+    trigger_focused_cue: async (args: { index: number }) => {
+      await client.triggerFocusedCue(args.index);
+      return { content: [{ type: "text" as const, text: `Triggered cue ${args.index} in focused presentation` }] };
+    },
+    timeline_operation: async (args: { operation: "play" | "pause" | "rewind" }) => {
       await client.timelineOperation(args.operation);
       return { content: [{ type: "text" as const, text: `Presentation timeline: ${args.operation}` }] };
     },
-    presentation_get_timeline_status: async () => {
+    get_timeline_status: async () => {
       const result = await client.getTimelineStatus();
       return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
     },

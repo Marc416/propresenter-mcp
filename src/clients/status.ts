@@ -4,7 +4,7 @@ export class StatusClient {
   constructor(private fetch: (path: string, options?: RequestInit) => Promise<any>) {}
 
   async getVersion(): Promise<any> {
-    return this.fetch("/v1/version");
+    return this.fetch("/version");
   }
 
   async getScreens(): Promise<any> {

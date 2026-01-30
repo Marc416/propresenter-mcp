@@ -25,30 +25,8 @@ export const messagesTools: Tool[] = [
     },
   },
   {
-    name: "messages_show",
-    description: "Show a specific message",
-    inputSchema: {
-      type: "object",
-      properties: {
-        messageId: {
-          type: "string",
-          description: "The ID of the message to show",
-        },
-      },
-      required: ["messageId"],
-    },
-  },
-  {
-    name: "messages_hide",
-    description: "Hide all currently displayed messages",
-    inputSchema: {
-      type: "object",
-      properties: {},
-    },
-  },
-  {
     name: "messages_trigger",
-    description: "Trigger a specific message",
+    description: "Trigger (show) a specific message",
     inputSchema: {
       type: "object",
       properties: {
@@ -62,13 +40,13 @@ export const messagesTools: Tool[] = [
   },
   {
     name: "messages_clear",
-    description: "Clear a specific message",
+    description: "Clear (hide) a specific message",
     inputSchema: {
       type: "object",
       properties: {
         messageId: {
           type: "string",
-          description: "The ID of the message to clear",
+          description: "The ID of the message to clear/hide",
         },
       },
       required: ["messageId"],

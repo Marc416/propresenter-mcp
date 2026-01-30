@@ -11,14 +11,6 @@ export class MessagesClient {
     return this.fetch(`/v1/message/${encodeURIComponent(messageId)}`);
   }
 
-  async show(messageId: string): Promise<any> {
-    return this.fetch(`/v1/message/${encodeURIComponent(messageId)}`);
-  }
-
-  async hide(): Promise<any> {
-    return this.fetch("/v1/message/hide");
-  }
-
   async trigger(messageId: string): Promise<any> {
     return this.fetch(`/v1/message/${encodeURIComponent(messageId)}/trigger`);
   }
