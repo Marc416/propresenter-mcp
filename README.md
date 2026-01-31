@@ -1,4 +1,4 @@
-# ProPresenter MCP Server
+# propresenter-mcp
 
 A comprehensive Model Context Protocol (MCP) server that provides complete control over ProPresenter presentations via the ProPresenter API. This server implements the full ProPresenter API specification with **231 endpoints** organized into **27 API groups** and exposed through modular client classes.
 
@@ -6,14 +6,14 @@ A comprehensive Model Context Protocol (MCP) server that provides complete contr
 
 This MCP server provides complete coverage of the ProPresenter API across all major control surfaces:
 
-### 📊 Status & System (API Groups 21, 27)
-- Get ProPresenter version and build information (Group 27: /version)
-- Get/set audience and stage screen status (Group 21: /v1/status)
+### 📊 Status & System
+- Get ProPresenter version and build information (/version)
+- Get/set audience and stage screen status (/v1/status)
 - Get layer status information
 - Get slide/cue information
 - Aggregate status updates from multiple endpoints
 
-### 🎬 Presentation Controls (API Group 16)
+### 🎬 Presentation Controls
 - **31 endpoints** for complete presentation control
 - Get focused/active presentations
 - Get current slide index and chord charts
@@ -23,14 +23,14 @@ This MCP server provides complete coverage of the ProPresenter API across all ma
 - Group-based triggering
 - Thumbnail generation for any slide
 
-### 📢 Announcement Controls (API Group 1)
+### 📢 Announcement Controls
 - **9 endpoints** for announcement management
 - Get active announcements and slide index
 - Focus and trigger announcements
 - Navigate through announcement cues
 - Timeline operations for announcements
 
-### 🎵 Audio & Media Playlists (API Groups 2, 13)
+### 🎵 Audio & Media Playlists
 - **21 audio endpoints** + **22 media endpoints**
 - List and manage playlists
 - Get playlist contents with pagination
@@ -39,7 +39,7 @@ This MCP server provides complete coverage of the ProPresenter API across all ma
 - Real-time playlist updates
 - Navigate through playlist items
 
-### 📋 Presentation Playlists (API Group 15)
+### 📋 Presentation Playlists
 - **30 endpoints** for playlist management
 - Complete CRUD operations for playlists
 - Focus management (active, focused, next, previous)
@@ -48,62 +48,62 @@ This MCP server provides complete coverage of the ProPresenter API across all ma
 - Thumbnail generation
 - Real-time playlist change updates
 
-### 📹 Capture Controls (API Group 3)
+### 📹 Capture Controls
 - **4 endpoints** for recording control
 - Get capture status and time
 - Start/stop capture operations
 - Get capture settings
 - Get available capture encodings (disk, RTMP, Resi)
 
-### 🧹 Clear Controls (API Group 4)
+### 🧹 Clear Controls
 - **9 endpoints** for clearing layers
 - Clear specific layers (audio, props, messages, announcements, slide, media, video_input)
 - Full CRUD operations for clear groups
 - Custom group icons
 - Trigger clear groups
 
-### 📚 Library Controls (API Group 7)
+### 📚 Library Controls
 - **4 endpoints** for library access
 - List all configured libraries
 - Get library contents
 - Trigger presentations from libraries
 - Trigger specific cues in library presentations
 
-### 👁️ Looks (API Group 8)
+### 👁️ Looks
 - **8 endpoints** for audience screen control
 - List all configured looks
 - Get/set current live look
 - Full CRUD operations for looks
 - Trigger looks to make them live
 
-### ⚙️ Macros (API Groups 9-11)
+### ⚙️ Macros
 - **12 endpoints** for macro automation
 - List all configured macros
 - Full CRUD for macros and macro collections
 - Custom macro icons
 - Trigger macros
 
-### 🎭 Props (API Groups 17-19)
+### 🎭 Props
 - **14 endpoints** for prop management
 - Full CRUD for props and prop collections
 - Trigger and clear props
 - Auto-clear timer control (pause/resume)
 - Prop thumbnails
 
-### 📱 Stage Displays (API Group 20)
+### 📱 Stage Displays
 - **11 endpoints** for stage screen control
 - Show/hide stage messages
 - Get/set stage layout maps
 - Manage stage screens and layouts
 - Layout thumbnails
 
-### 💬 Messages (API Group 14)
+### 💬 Messages
 - **7 endpoints** for message control
 - Full CRUD operations for messages
 - Show/hide messages with token support
 - Clear all messages
 
-### ⏱️ Timers (API Group 23)
+### ⏱️ Timers
 - **12 endpoints** for timer management
 - Full CRUD operations for timers
 - Start/stop/reset operations
@@ -111,19 +111,19 @@ This MCP server provides complete coverage of the ProPresenter API across all ma
 - Increment timer values
 - Get all timer states
 
-### 🎨 Themes (API Group 22)
+### 🎨 Themes
 - **5 endpoints** for theme management
 - List all themes and theme slides
 - Get/set theme slide details
 - Theme slide thumbnails
 
-### 🎭 Masks (API Group 12)
+### 🎭 Masks
 - **3 endpoints** for mask control
 - List all configured masks
 - Get mask details
 - Mask thumbnails
 
-### 🎮 Transport Controls (API Group 24)
+### 🎮 Transport Controls
 - **10 endpoints** for media transport
 - Play/pause controls for presentation, announcement, and audio layers
 - Skip forward/backward by time
@@ -131,16 +131,16 @@ This MCP server provides complete coverage of the ProPresenter API across all ma
 - Go to end
 - Auto-advance control
 
-### 🔧 Global Groups (API Group 6)
+### 🔧 Global Groups
 - **1 endpoint** for global group management
 - List all configured global groups
 
-### 🎯 Trigger Controls (API Group 25)
+### 🎯 Trigger Controls
 - **6 endpoints** for quick triggering
 - Trigger next/previous for audio and media
 - Universal next/previous for active content
 
-### 📹 Video Inputs (API Group 26)
+### 📹 Video Inputs
 - **2 endpoints** for video input control
 - List video inputs playlist
 - Trigger video inputs
@@ -152,24 +152,24 @@ The codebase is organized into a modular structure with complete API coverage:
 ```
 src/
 ├── clients/          # API client classes (18 modules, 231 endpoints)
-│   ├── announcement.ts    # Group 1: 9 endpoints
-│   ├── audio.ts           # Group 2: 21 endpoints
-│   ├── capture.ts         # Group 3: 4 endpoints
-│   ├── clear.ts           # Group 4: 9 endpoints
-│   ├── globalGroups.ts    # Group 6: 1 endpoint
-│   ├── library.ts         # Group 7: 4 endpoints
-│   ├── looks.ts           # Group 8: 8 endpoints
-│   ├── macros.ts          # Groups 9-11: 12 endpoints
-│   ├── masks.ts           # Group 12: 3 endpoints
-│   ├── messages.ts        # Group 14: 7 endpoints
-│   ├── playlists.ts       # Group 15: 30 endpoints
-│   ├── presentation.ts    # Group 16: 31 endpoints
-│   ├── props.ts           # Groups 17-19: 14 endpoints
-│   ├── stage.ts           # Group 20: 11 endpoints
-│   ├── status.ts          # Groups 21+27: 9 endpoints
-│   ├── themes.ts          # Group 22: 5 endpoints
-│   ├── timers.ts          # Group 23: 12 endpoints
-│   └── transport.ts       # Group 24: 10 endpoints
+│   ├── announcement.ts    # 9 endpoints
+│   ├── audio.ts           # 21 endpoints
+│   ├── capture.ts         # 4 endpoints
+│   ├── clear.ts           # 9 endpoints
+│   ├── globalGroups.ts    # 1 endpoint
+│   ├── library.ts         # 4 endpoints
+│   ├── looks.ts           # 8 endpoints
+│   ├── macros.ts          # 12 endpoints
+│   ├── masks.ts           # 3 endpoints
+│   ├── messages.ts        # 7 endpoints
+│   ├── playlists.ts       # 30 endpoints
+│   ├── presentation.ts    # 31 endpoints
+│   ├── props.ts           # 14 endpoints
+│   ├── stage.ts           # 11 endpoints
+│   ├── status.ts          # 9 endpoints
+│   ├── themes.ts          # 5 endpoints
+│   ├── timers.ts          # 12 endpoints
+│   └── transport.ts       # 10 endpoints
 ├── tools/            # MCP tool definitions (18 modules)
 │   ├── announcement.ts
 │   ├── audio.ts
@@ -273,7 +273,7 @@ Add this to your Claude Desktop configuration file:
   "mcpServers": {
     "propresenter": {
       "command": "node",
-      "args": ["/absolute/path/to/mpc-propresenter/build/index.js"],
+      "args": ["/absolute/path/to/propresenter-mcp/build/index.js"],
       "env": {
         "PROPRESENTER_URL": "http://localhost:50000",
         "PROPRESENTER_PASSWORD": "your-password-if-needed"
@@ -283,7 +283,7 @@ Add this to your Claude Desktop configuration file:
 }
 ```
 
-Replace `/absolute/path/to/mpc-propresenter` with the actual path to this project.
+Replace `/absolute/path/to/propresenter-mcp` with the actual path to this project.
 
 ### With VS Code
 
