@@ -1,6 +1,6 @@
 {
   "servers": {
-    "mcp-propresenter": {
+    "propresenter-mcp": {
       "type": "stdio",
       "command": "node",
       "args": [

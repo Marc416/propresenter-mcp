@@ -101,7 +101,7 @@ class ProPresenterClient {
 // MCP Server
 const server = new Server(
   {
-    name: "mcp-propresenter",
+    name: "propresenter-mcp",
     version: "1.0.0",
   },
   {
