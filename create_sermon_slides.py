@@ -22,6 +22,7 @@ import urllib.request
 import uuid as uuid_mod
 import time
 import unicodedata
+import platform
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from hwp_red_extract import extract_red_text
@@ -31,10 +32,20 @@ from create_pro import (
 )
 
 PP_API = "http://localhost:54686"
-LIBRARY_DIR = os.path.expanduser(
-    "~/Library/Application Support/RenewedVision/ProPresenter/"
-    "UserWorkspaces/ProPresenter/Libraries/기본"
-)
+
+if platform.system() == "Windows":
+    LIBRARY_DIR = os.path.join(
+        os.environ.get("APPDATA", ""),
+        "RenewedVision", "ProPresenter",
+        "UserWorkspaces", "ProPresenter", "Libraries", "기본"
+    )
+else:
+    LIBRARY_DIR = os.path.expanduser(
+        "~/Library/Application Support/RenewedVision/ProPresenter/"
+        "UserWorkspaces/ProPresenter/Libraries/기본"
+    )
+
+os.makedirs(LIBRARY_DIR, exist_ok=True)
 
 
 # ─── API helpers ───
